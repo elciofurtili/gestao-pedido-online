@@ -1,0 +1,4 @@
+com/example/faturamento/FaturamentoApplication.class
+com/example/faturamento/controller/FaturamentoWebController.class
+com/example/faturamento/service/FaturamentoService.class
+com/example/faturamento/model/Pedido.class
