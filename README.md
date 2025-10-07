@@ -1,24 +1,24 @@
 # Sistema de Gestão de Pedidos com Arquitetura de Microsserviços Assíncrona
 
-Este projeto é uma implementação de um sistema simplificado de Gestão de Pedidos Online, demonstrando uma arquitetura de microsserviços com comunicação assíncrona baseada em eventos. [cite_start]A solução foi desenvolvida para resolver problemas comuns em sistemas distribuídos, como alto acoplamento e lentidão em cascata, que ocorrem em modelos de comunicação síncrona[cite: 3].
+Este projeto é uma implementação de um sistema simplificado de Gestão de Pedidos Online, demonstrando uma arquitetura de microsserviços com comunicação assíncrona baseada em eventos. A solução foi desenvolvida para resolver problemas comuns em sistemas distribuídos, como alto acoplamento e lentidão em cascata, que ocorrem em modelos de comunicação síncrona.
 
 ## Visão Geral da Arquitetura
 
-[cite_start]O sistema é composto por dois microsserviços independentes que se comunicam através de um broker de mensagens (RabbitMQ), adotando um modelo de comunicação assíncrona baseada em eventos[cite: 6].
+O sistema é composto por dois microsserviços independentes que se comunicam através de um broker de mensagens (RabbitMQ), adotando um modelo de comunicação assíncrona baseada em eventos.
 
-1.  [cite_start]**Serviço de Pedidos (`servico-pedidos`)**: Responsável por receber e registrar novos pedidos no sistema[cite: 10]. [cite_start]Ao receber uma nova requisição, ele publica um evento `NovoPedidoCriado` em um tópico[cite: 11].
-2.  [cite_start]**Serviço de Faturamento (`servico-faturamento`)**: Consome os eventos `NovoPedidoCriado` da fila[cite: 12]. [cite_start]Ele processa o pagamento do pedido de forma desacoplada, sem que o cliente precise esperar pela conclusão do faturamento para ter seu pedido confirmado[cite: 13, 14].
+1.  **Serviço de Pedidos (`servico-pedidos`)**: Responsável por receber e registrar novos pedidos no sistema. Ao receber uma nova requisição, ele publica um evento `NovoPedidoCriado` em um tópico.
+2.  **Serviço de Faturamento (`servico-faturamento`)**: Consome os eventos `NovoPedidoCriado` da fila. Ele processa o pagamento do pedido de forma desacoplada, sem que o cliente precise esperar pela conclusão do faturamento para ter seu pedido confirmado.
 
-[cite_start]Esse modelo reduz o acoplamento, aumenta a resiliência e a escalabilidade do sistema[cite: 8].
+Esse modelo reduz o acoplamento, aumenta a resiliência e a escalabilidade do sistema.
 
 ### Tecnologias Utilizadas
 
 A solução foi construída utilizando as seguintes tecnologias:
 
-* [cite_start]**Microsserviços**: Spring Boot [cite: 16]
-* [cite_start]**Comunicação Assíncrona**: Spring Cloud Stream com RabbitMQ [cite: 17]
-* [cite_start]**Gerenciador de Dependências**: Maven [cite: 18]
-* [cite_start]**Orquestração do Broker**: Docker [cite: 19]
+* [cite_start]**Microsserviços**: Spring Boot
+* [cite_start]**Comunicação Assíncrona**: Spring Cloud Stream com RabbitMQ
+* [cite_start]**Gerenciador de Dependências**: Maven
+* [cite_start]**Orquestração do Broker**: Docker
 * **Banco de Dados**: Nenhum banco de dados persistente é utilizado nesta demonstração. Os dados de faturamento são mantidos em memória.
 
 ## Pré-requisitos
