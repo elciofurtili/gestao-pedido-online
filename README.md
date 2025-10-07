@@ -15,10 +15,10 @@ Esse modelo reduz o acoplamento, aumenta a resiliência e a escalabilidade do si
 
 A solução foi construída utilizando as seguintes tecnologias:
 
-* [cite_start]**Microsserviços**: Spring Boot
-* [cite_start]**Comunicação Assíncrona**: Spring Cloud Stream com RabbitMQ
-* [cite_start]**Gerenciador de Dependências**: Maven
-* [cite_start]**Orquestração do Broker**: Docker
+* **Microsserviços**: Spring Boot
+* **Comunicação Assíncrona**: Spring Cloud Stream com RabbitMQ
+* **Gerenciador de Dependências**: Maven
+* **Orquestração do Broker**: Docker
 * **Banco de Dados**: Nenhum banco de dados persistente é utilizado nesta demonstração. Os dados de faturamento são mantidos em memória.
 
 ## Pré-requisitos
@@ -56,7 +56,7 @@ gestao-pedidos-online/
 O RabbitMQ será executado como um contêiner Docker. Na raiz do projeto (`gestao-pedidos-online`), execute o seguinte comando:
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 Isso iniciará o RabbitMQ em background. O broker estará disponível na porta `5672` e a interface de gerenciamento na porta `15672`.
@@ -67,7 +67,7 @@ Abra um **novo terminal**, navegue até a pasta do serviço de faturamento e exe
 
 ```bash
 cd servico-faturamento
-./mvnw spring-boot:run
+mvn spring-boot:run
 ```
 
 Este serviço irá iniciar na porta `8081` e começará a "ouvir" por mensagens na fila do RabbitMQ.
@@ -78,7 +78,7 @@ Abra **outro terminal**, navegue até a pasta do serviço de pedidos e inicie a 
 
 ```bash
 cd servico-pedidos
-./mvnw spring-boot:run
+mvn spring-boot:run
 ```
 
 Este serviço irá iniciar na porta `8080`.
@@ -108,6 +108,3 @@ Para observar o comportamento da comunicação assíncrona, você pode inspecion
 * Acesse a interface de gerenciamento: **`http://localhost:15672`**
 * **Login**: `guest`
 * **Senha**: `guest`
-* Navegue até a aba **"Queues"**. Você encontrará a fila `pedidos-exchange.faturamento-group`.
-
-**Teste de Resiliência:** Para ver a fila em ação, pare o `servico-faturamento`, envie um novo pedido pelo formulário e observe a mensagem aparecer na fila do RabbitMQ. Ao reiniciar o serviço, a mensagem será consumida e processada.
